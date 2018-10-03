@@ -18,3 +18,34 @@
 		padding: 1rem;
 	}
 }
+
+#tabs{
+
+	a{
+		/*margin-right: 1rem;*/
+		padding: 1rem 2rem;
+		border-bottom: 2px solid transparent;
+		color: #a2a2a2;
+
+		i{
+			margin-right: 0.2rem;
+		}
+
+		&.active{
+			color: #007bff;
+			border-bottom: 2px solid #007bff;
+		}
+		
+		&.active:hover{
+			color: #007bff;
+			border-bottom: 2px solid #007bff;
+			text-decoration: none;
+		}
+
+		&:hover{
+			text-decoration: none;
+			color: #a2a2a2;
+			border-bottom: 2px solid #a2a2a2;
+		}
+	}
+}

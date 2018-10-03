@@ -12,38 +12,41 @@
 	<div class="card">
 		<div class="card-body">
 			 @include('complements.errors')
-			<form action="{{url('company/vacant')}}" method="POST" id="formCreareVacant">
+			<form action='{{url("company/vacant/{$vacant->id}")}}' method="POST" id="formCreareVacant">
 				{{ csrf_field() }}
+				{{ method_field('PUT') }}
 				<div class="form-row">
 					<div class="col-md-4">
-						<label for="name">Nombre de la vacante</label>
-						<input type="text" name="title" placeholder="" class="form-control">
+						<label for="title">Nombre de la vacante</label>
+						{!! Form::text('title', $vacant->title, ['class'=>'form-control']) !!}
 					</div>
 					<div class="col-md-2">
 						<label for="contract_type_id">Tipo de contrato</label>
-						{!! Form::select('contract_type_id', $contractTypes, null, ['class'=>'form-control']) !!}
+						{!! Form::select('contract_type_id', $contractTypes, $vacant->contract_type_id, ['class'=>'form-control']) !!}
 					</div>
 					<div class="col-md-2">
 						<label for="working_day_id">Jornada</label>
-						{!! Form::select('working_day_id', $workingDay, null, ['class'=>'form-control']) !!}
+						{!! Form::select('working_day_id', $workingDay, $vacant->working_day_id, ['class'=>'form-control']) !!}
 					</div>
 					<div class="col-md-2">
 						<label for="salary">Salario</label>
-						{!! Form::text('salary', null, ['class' => 'form-control']) !!}
+						{!! Form::text('salary', $vacant->salary, ['class' => 'form-control']) !!}
 					</div>
 					<div class="col-md-2">
 						<label for="expired_date">Fecha de culminación</label>
-						<input type="text" id="datepicker" name="expired_date" class="form-control">
+						{!! Form::text('expired_date', $vacant->expired_date, ['class'=>'form-control']) !!}
 					</div>
 				</div>
 				<div class="form-row">
 					<div class="col">
 						<label for="description">Descripción</label>
-						<textarea id="description" class="form-control" name="description"></textarea>
+						<textarea id="description" class="form-control" name="description">
+							{!! $vacant->description !!}
+						</textarea>
 					</div>
 				</div>
 				<div class="mt-3">
-					<button type="submit" class="btn btn-primary">Crear vacante</button>
+					<button type="submit" class="btn btn-primary">Actualizar vacante</button>
 				</div>
 			</form>
 		</div>

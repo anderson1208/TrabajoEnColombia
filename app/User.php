@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'last_name', 'identification_type_id', 'identification_number', 'address_id', 'email', 'email_verified_at', 'password', 'avatar',
+        'name', 'last_name', 'identification_type_id', 'identification_number', 'address_id', 'gender_id', 'civil_status_id', 'email', 'email_verified_at', 'password', 'avatar',
     ];
 
     /**
@@ -37,9 +37,18 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Address::class, 'address_id');
     }
-
-    public function companies()
+    public function gender()
     {
-        return $this->belongsToMany(Company::class, 'company_users');
+        return $this->belongsTo(Gender::class, 'gender_id');
+    }
+
+    public function civilStatus()
+    {
+        return $this->belongsTo(CivilStatus::class, 'civil_status_id');
+    }
+
+    public function cv()
+    {
+        return $this->hasOne(CurriculumVitae::class, 'user_id');
     }
 }

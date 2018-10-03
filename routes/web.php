@@ -34,7 +34,19 @@ Route::group(['prefix' => 'company'], function() {
 
     Route::get('/', 'CompanyController@home')->name('company.home');
 
-    Route::resource('employee', 'Company\UserController');
     Route::resource('vacant', 'Company\VacantController');
 
 });
+
+Route::group(['prefix' => 'user', 'middleware'=>'auth'], function() {
+
+    Route::get('/', function() {
+        return redirect()->route('user.home');
+    });
+
+    Route::get('/home', 'UserController@index')->name('user.home');
+
+    Route::get('cv', 'User\CurriculumVitaeController@index')->name('myCV');
+    Route::put('cv/{user}/updatePersonalInfo', 'User\CurriculumVitaeController@updatePersonalInfo')->name('cv.update.personalInfo');
+});
+

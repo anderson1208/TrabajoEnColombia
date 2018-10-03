@@ -19,4 +19,9 @@ class CurriculumVitae extends Model
     {
     	return $this->hasMany(WorkExperience::class, 'curriculum_vitae_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
