@@ -10,7 +10,7 @@ class CurriculumVitae extends Model
     	'user_id', 'profession_profile', 'occupation'
     ];
 
-    public function educationInformations()
+    public function formations()
     {
     	return $this->hasMany(EducationInformation::class, 'curriculum_vitae_id');
     }

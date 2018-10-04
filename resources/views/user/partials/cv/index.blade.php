@@ -23,6 +23,12 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/messages/messages.es-es.js" type="text/javascript"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.es.min.js"></script>
-
+	
+	<script>
+		$('.datepicker').datepicker({
+		    language: "es",
+		    format: "yyyy-mm-dd"
+		});
+	</script>
 	@yield('education')
 @endsection

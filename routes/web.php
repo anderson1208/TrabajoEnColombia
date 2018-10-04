@@ -47,6 +47,11 @@ Route::group(['prefix' => 'user', 'middleware'=>'auth'], function() {
     Route::get('/home', 'UserController@index')->name('user.home');
 
     Route::get('cv', 'User\CurriculumVitaeController@index')->name('myCV');
-    Route::put('cv/{user}/updatePersonalInfo', 'User\CurriculumVitaeController@updatePersonalInfo')->name('cv.update.personalInfo');
+    Route::put('cv/updatePersonalInfo', 'User\CurriculumVitaeController@updatePersonalInfo')->name('cv.update.personalInfo');
+
+    Route::get('/cv/formations', 'User\CurriculumVitaeController@formations');
+    Route::post('/cv/formation', 'User\CurriculumVitaeController@formationStore')->name('cv.addEducation');
+    Route::put('/cv/formation/{formation}', 'User\CurriculumVitaeController@formationUpdate')->name('cv.formation.update');
+    Route::delete('/cv/formation/{formation}', 'User\CurriculumVitaeController@formationDestroy')->name('cv.formation.destroy');
 });
 
