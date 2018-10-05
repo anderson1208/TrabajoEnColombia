@@ -53,6 +53,18 @@ class CurriculumVitaeController extends Controller
         ]);
     }
 
+    public function updateAddress(Request $request, User $user)
+    {
+        $address = $user->address;
+        $address->fill($request->all());
+        $address->update();
+
+        return response()->json([
+            'result'    =>  true,
+            'data'      =>  $address
+        ]);
+    }
+
     public function formations(Request $request)
     {
         $educationLevels = EducationLevel::all()->pluck('name', 'id');

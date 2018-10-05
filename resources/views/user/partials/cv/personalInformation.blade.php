@@ -8,7 +8,7 @@
 		</div>
 	</div>
 	<div class="card-body collapse" id="collapsePersonalInformation">
-		{!! Form::open(['route'=>['cv.update.personalInfo', $user], 'method'=>'PUT']) !!}
+		{!! Form::open(['route'=>['cv.update.personalInfo', $user], 'method'=>'PUT', 'id'=>'formPersonalInfoUpdate']) !!}
 		<div class="form-row">
 			<div class="form-group col-md-6">
 				<label for="">Nombres</label>
@@ -47,3 +47,40 @@
 		{!! Form::close() !!}
 	</div>
 </div>
+
+@section('personalInformation')
+	<script>
+		(function(){
+
+			$("#formPersonalInfoUpdate").submit(function(e){
+
+				e.preventDefault();
+
+				var form = $(this);
+
+				$.ajax({
+					url: form.attr('action'),
+					method: form.attr('method'),
+					data: form.serialize(),
+					dataType: 'json',
+					beforeSend: function(){
+						form.find('input').prop('disabled', true);
+						form.find('select').prop('disabled', true);
+						form.find('button').text('Actualizando información personal').prop('disabled', true);
+					},
+					success: function(data){
+						form.find('input').prop('disabled', false);
+						form.find('select').prop('disabled', false);
+						form.find('button').text('Actualizar información personal').prop('disabled', false);
+					},
+					error: function(xhr){
+						form.find('input').prop('disabled', false);
+						form.find('select').prop('disabled', false);
+						form.find('button').text('Actualizar información personal').prop('disabled', false);
+					}
+				});
+			});
+
+		}());
+	</script>
+@endsection

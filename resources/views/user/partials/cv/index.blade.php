@@ -31,6 +31,8 @@
 		    format: "yyyy-mm-dd"
 		});
 	</script>
+	@yield('personalInformation')
+	@yield('address')
 	@yield('education')
 	@yield('workExperience')
 @endsection

@@ -60,5 +60,8 @@ Route::group(['prefix' => 'user', 'middleware'=>'auth'], function() {
     Route::post('/cv/workExperience', 'User\CurriculumVitaeController@workExperienceStore')->name('cv.addworkExperience');
     Route::put('/cv/workExperience/{workExperience}', 'User\CurriculumVitaeController@workExperienceUpdate')->name('cv.workExperience.update');
     Route::delete('/cv/workExperience/{workExperience}', 'User\CurriculumVitaeController@workExperienceDestroy')->name('cv.workExperience.destroy');
+
+    // Ruta para actualizar la dirección
+    Route::put('/cv/{user}/updateAddress', 'User\CurriculumVitaeController@updateAddress');
 });
 
