@@ -16,7 +16,7 @@ class CreateCurriculumVitaesTable extends Migration
         Schema::create('curriculum_vitaes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('profession_profile')->nullable();
+            $table->text('profession_profile')->nullable();
             $table->string('occupation')->nullable();
             $table->timestamps();
 

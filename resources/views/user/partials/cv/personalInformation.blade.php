@@ -8,7 +8,7 @@
 		</div>
 	</div>
 	<div class="card-body collapse" id="collapsePersonalInformation">
-		{!! Form::open(['route'=>['cv.update.personalInfo', $user], 'method'=>'PUT', 'id'=>'formPersonalInfoUpdate']) !!}
+		{!! Form::open(['route'=> 'cv.update.personalInfo', 'method'=>'PUT', 'id'=>'formPersonalInfoUpdate']) !!}
 		<div class="form-row">
 			<div class="form-group col-md-6">
 				<label for="">Nombres</label>

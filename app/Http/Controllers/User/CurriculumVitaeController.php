@@ -42,26 +42,38 @@ class CurriculumVitaeController extends Controller
         ->with('educationStates',$educationStates); 
     }
 
-    public function updatePersonalInfo(Request $request, User $user)
+    public function updatePersonalInfo(Request $request)
     {
-        $user->fill($request->all());
-        $user->update();
+        $this->user->fill($request->all());
+        $this->user->update();
 
         return response()->json([
             'result'    =>  true,
-            'data'      =>  $user
+            'data'      =>  $this->user
         ]);
     }
 
-    public function updateAddress(Request $request, User $user)
+    public function updateAddress(Request $request)
     {
-        $address = $user->address;
+        $address = $this->user->address;
         $address->fill($request->all());
         $address->update();
 
         return response()->json([
             'result'    =>  true,
             'data'      =>  $address
+        ]);
+    }
+
+    public function updateProfessionalProfile(Request $request)
+    {
+        $cv = $this->user->cv;
+        $cv->fill($request->all());
+        $cv->update();
+
+        return response()->json([
+            'result'    =>  true,
+            'data'      =>  $cv
         ]);
     }
 

@@ -47,7 +47,7 @@ Route::group(['prefix' => 'user', 'middleware'=>'auth'], function() {
     Route::get('/home', 'UserController@index')->name('user.home');
 
     Route::get('cv', 'User\CurriculumVitaeController@index')->name('myCV');
-    Route::put('cv/{user}/updatePersonalInfo', 'User\CurriculumVitaeController@updatePersonalInfo')->name('cv.update.personalInfo');
+    Route::put('cv/updatePersonalInfo', 'User\CurriculumVitaeController@updatePersonalInfo')->name('cv.update.personalInfo');
 
     // Rutas para la Formación academica
     Route::get('/cv/formations', 'User\CurriculumVitaeController@formations');
@@ -62,6 +62,9 @@ Route::group(['prefix' => 'user', 'middleware'=>'auth'], function() {
     Route::delete('/cv/workExperience/{workExperience}', 'User\CurriculumVitaeController@workExperienceDestroy')->name('cv.workExperience.destroy');
 
     // Ruta para actualizar la dirección
-    Route::put('/cv/{user}/updateAddress', 'User\CurriculumVitaeController@updateAddress');
+    Route::put('/cv/updateAddress', 'User\CurriculumVitaeController@updateAddress');
+
+    // Ruta para actualizar el perfil profesional
+    Route::put('/cv/updateProfessionalProfile', 'User\CurriculumVitaeController@updateProfessionalProfile');
 });
 

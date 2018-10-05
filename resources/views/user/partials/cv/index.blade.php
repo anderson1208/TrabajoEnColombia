@@ -33,6 +33,7 @@
 	</script>
 	@yield('personalInformation')
 	@yield('address')
+	@yield('professionalProfile')
 	@yield('education')
 	@yield('workExperience')
 @endsection
