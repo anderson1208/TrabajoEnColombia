@@ -1,8 +1,13 @@
 <div class="card mb-4">
-	<div class="card-header bg-white">
-		<h5>Dirección</h5>
+	<div class="card-header bg-white clearfix">
+		<h5 class="float-left">Dirección</h5>
+		<div class="float-right">
+			<a data-toggle="collapse" href="#collapseAddress" role="button" aria-expanded="false" aria-controls="collapseAddress">
+				<i class="fa fa-chevron-down"></i>
+			</a>
+		</div>
 	</div>
-	<div class="card-body">
+	<div class="card-body collapse" id="collapseAddress">
 		{!! Form::open(['route'=>['cv.update.personalInfo', $user], 'method'=>'PUT']) !!}
 		<div class="form-row">
 			<div class="form-group col-md-6">

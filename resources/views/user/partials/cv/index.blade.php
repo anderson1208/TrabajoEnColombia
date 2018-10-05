@@ -13,6 +13,7 @@
 				@include('user.partials.cv.address')
 				@include('user.partials.cv.professionalProfile')
 				@include('user.partials.cv.formation')
+				@include('user.partials.cv.workExperiences')
 			</div>
 		</div>
 	</div>
@@ -31,4 +32,5 @@
 		});
 	</script>
 	@yield('education')
+	@yield('workExperience')
 @endsection

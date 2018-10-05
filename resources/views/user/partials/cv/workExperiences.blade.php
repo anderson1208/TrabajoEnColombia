@@ -1,35 +1,47 @@
 <div class="card mb-4">
 	<div class="card-header bg-white clearfix">
-		<h5 class="float-left">Formación acádemica</h5>
+		<h5 class="float-left">Experiencia laboral</h5>
 		<div class="float-right">
-			<a data-toggle="collapse" href="#collapseFormation" role="button" aria-expanded="false" aria-controls="collapseFormation">
+			<a data-toggle="collapse" href="#collapseWExperience" role="button" aria-expanded="false" aria-controls="collapseWExperience">
 				<i class="fa fa-chevron-down"></i>
 			</a>
 		</div>
 	</div>
-	<div class="card-body collapse" id="collapseFormation">
+	<div class="card-body collapse" id="collapseWExperience">
 		<div  class="text-center mb-3">
-			<a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+			<a data-toggle="collapse" href="#collapseWE" role="button" aria-expanded="false" aria-controls="collapseWE">
 				<i class="fa fa-plus"></i>
 				<span>Agregar</span>
 			</a>
 		</div>
-		<div class="collapse" id="collapseExample">
-			{!! Form::open(['route'=> 'cv.addEducation', 'method'=>'POST', 'id'=>'formCreateFormation']) !!}
+		<div class="collapse" id="collapseWE">
+			{!! Form::open(['url' => '/user/cv/workExperience', 'method'=>'POST', 'id'=>'formStoreWE']) !!}
 			<div class="form-row">
 				<div class="form-group col-md-12">
-					<label for="">Centro educativo</label>
-					{!! Form::text('school_name', null, ['class'=>'form-control']) !!}
+					<label for="">Empresa</label>
+					{!! Form::text('company', null, ['class'=>'form-control']) !!}
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<label for="">Cargo</label>
+					{!! Form::text('charge', null, ['class'=>'form-control']) !!}
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<label for="">Funciones</label>
+					{!! Form::textarea('functions', null, ['class'=>'form-control']) !!}
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="">Nivel educativo</label>
-					{!! Form::select('education_level_id', $educationLevels, null, ['class'=>'form-control', 'placeholder'=>'- Seleccione un nivel -']) !!}
+					<label for="">Jefe inmediato</label>
+					{!! Form::text('boss_name', null, ['class'=>'form-control']) !!}
 				</div>
 				<div class="form-group col-md-6">
-					<label for="">Estado</label>
-					{!! Form::select('education_state_id', $educationStates, null, ['class'=>'form-control', 'placeholder'=>'- Seleccione un estado -']) !!}
+					<label for="">Teléfono</label>
+					{!! Form::text('phone', null, ['class'=>'form-control']) !!}
 				</div>
 			</div>
 			<div class="form-row">
@@ -45,40 +57,31 @@
 			<div class="form-row">
 				<div class="form-group col-md-12">
 					<button class="btn btn-primary btn-block">Agregar</button>
-					<button class="btn btn-light btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Cancelar</button>
+					<button class="btn btn-light btn-block" type="button" data-toggle="collapse" data-target="#collapseWE" aria-expanded="false" aria-controls="collapseWE">Cancelar</button>
 				</div>
 			</div>
 			{!! Form::close() !!}
 		</div>
-		<div id="formations">
+		<div id="wExperiences">
 			
 		</div>
 	</div>
 </div>
 
-@section('education')
+@section('workExperience')
 	<script>
 		(function(){
 
-			var collapseFormFormation = function(){
-				$("#collapseExample").collapse('hide');
-			}
-
-			var clearFormFormation = function(form){
-
-				form.find('input').val('');
-				form.find('select').val('');
-			}
-
-			var loadFormations = function(){
+			// 
+			var loadWorkExperiences = function(){
 
 				// Obtenemos todas la formciones cuando cargue el document
-				$.get("/user/cv/formations", function(data){
-					$("#formations").empty().html(data.view);
+				$.get("/user/cv/workExperiences", function(data){
+					$("#wExperiences").empty().html(data.view);
 
-					crudFormation();
+					crudWorkExperience();
 
-					$("#formations").find('form input.datepicker').datepicker({
+					$("#wExperiences").find('form input.datepicker').datepicker({
 						language: "es",
 		    			format: "yyyy-mm-dd"
 					});	
@@ -87,10 +90,22 @@
 			}
 
 			// 
-			loadFormations();
+			var collapseFormWorkExperience = function(){
+				$("#collapseWE").collapse('hide');
+			}
+
+			// 
+			var clearFormWorkExperience = function(form){
+
+				form.find('input').val('');
+				form.find('select').val('');
+			}
+
+			// 
+			loadWorkExperiences();
 
 			// Enviamos el formulario
-			$("#formCreateFormation").submit(function(e){
+			$("#formStoreWE").submit(function(e){
 
 				e.preventDefault();
 
@@ -110,10 +125,10 @@
 						form.find('input').prop('disabled', false);
 						form.find('button').text('Agregar').prop('disabled', false);
 
-						collapseFormFormation();
-						clearFormFormation(form);
+						collapseFormWorkExperience();
+						clearFormWorkExperience(form);
 
-						loadFormations();
+						loadWorkExperiences();
 					},
 					error: function(xhr){
 						form.find('input').prop('disabled', false);
@@ -122,9 +137,9 @@
 				});
 			});
 
-			// Eliminamos la formacion seleccionada
-			var crudFormation = function(){
-				$(".formationDel").click(function(e){
+			// Activamos los otros metodos curd faltantes
+			var crudWorkExperience = function(){
+				$(".workExperienceDel").click(function(e){
 
 					e.preventDefault();
 
@@ -140,7 +155,7 @@
 							form.find('button').prop('disabled', true);
 						},
 						success: function(data){
-							loadFormations();
+							loadWorkExperiences();
 						},
 						error: function(xhr){
 
@@ -148,7 +163,7 @@
 					});
 				});
 
-				$(".formFormationUpdate").submit(function(e){
+				$(".formWorkExperienceUpdate").submit(function(e){
 
 					e.preventDefault();
 
@@ -166,7 +181,7 @@
 							form.find(":submit").text('Actualizando');
 						},
 						success: function(data){
-							loadFormations();
+							loadWorkExperiences();
 						},
 						error: function(xhr){
 							form.find('input').prop('disabled', false);
@@ -175,7 +190,6 @@
 							form.find(":submit").text('Actualizar');
 						}
 					});
-					console.log('form', $(this));
 				});
 			}
 		}());

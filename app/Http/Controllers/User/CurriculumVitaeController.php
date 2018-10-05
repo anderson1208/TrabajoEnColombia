@@ -8,6 +8,7 @@ use App\EducationLevel;
 use App\EducationState;
 use App\IdentificationType;
 use App\EducationInformation;
+use App\WorkExperience;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -41,9 +42,15 @@ class CurriculumVitaeController extends Controller
         ->with('educationStates',$educationStates); 
     }
 
-    public function updatePersonalInfo(Request $request)
+    public function updatePersonalInfo(Request $request, User $user)
     {
+        $user->fill($request->all());
+        $user->update();
 
+        return response()->json([
+            'result'    =>  true,
+            'data'      =>  $user
+        ]);
     }
 
     public function formations(Request $request)
@@ -55,10 +62,21 @@ class CurriculumVitaeController extends Controller
 
         return response()->json([
             'data'  =>  $formations,
-            'view'      =>  View('user.partials.cv.formations')
+            'view'      =>  View('user.partials.cv.formations.index')
                             ->with('formations', $formations)
                             ->with('educationLevels',$educationLevels)
                             ->with('educationStates',$educationStates)
+                            ->render()
+        ]);
+    }
+
+    public function workExperiences(Request $request)
+    {
+        $wExperiences = $this->user->cv->workExperiences()->get();
+
+        return response()->json([
+            'view'      =>  View('user.partials.cv.workExperience.index')
+                            ->with('wExperiences', $wExperiences)
                             ->render()
         ]);
     }
@@ -69,13 +87,19 @@ class CurriculumVitaeController extends Controller
         $formation->curriculum_vitae_id = $this->user->cv->id;
         $formation->save();
 
-        $formations = $this->user->cv->formations()->get();
+        return response()->json([
+            'result'    =>  true,
+        ]);
+    }
+
+    public function workExperienceStore(Request $request)
+    {
+        $workExperience = new WorkExperience($request->all());
+        $workExperience->curriculum_vitae_id = $this->user->cv->id;
+        $workExperience->save();
 
         return response()->json([
             'result'    =>  true,
-            'view'      =>  View('user.partials.cv.formations')
-                            ->with('formations', $formations)
-                            ->render()
         ]);
     }
 
@@ -88,10 +112,28 @@ class CurriculumVitaeController extends Controller
             'data'  =>  $formation
         ]);
     }
+    public function workExperienceUpdate(Request $request, WorkExperience $workExperience)
+    {
+        $workExperience->fill($request->all());
+        $workExperience->update();
+
+        return response()->json([
+            'data'  =>  $workExperience
+        ]);
+    }
 
     public function formationDestroy(Request $request, EducationInformation $formation)
     {
         $formation->delete();
+
+        return response()->json([
+            'result' => true  
+        ]);
+    }
+
+    public function workExperienceDestroy(Request $request, WorkExperience $workExperience)
+    {
+        $workExperience->delete();
 
         return response()->json([
             'result' => true  

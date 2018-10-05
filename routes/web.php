@@ -47,11 +47,18 @@ Route::group(['prefix' => 'user', 'middleware'=>'auth'], function() {
     Route::get('/home', 'UserController@index')->name('user.home');
 
     Route::get('cv', 'User\CurriculumVitaeController@index')->name('myCV');
-    Route::put('cv/updatePersonalInfo', 'User\CurriculumVitaeController@updatePersonalInfo')->name('cv.update.personalInfo');
+    Route::put('cv/{user}/updatePersonalInfo', 'User\CurriculumVitaeController@updatePersonalInfo')->name('cv.update.personalInfo');
 
+    // Rutas para la Formación academica
     Route::get('/cv/formations', 'User\CurriculumVitaeController@formations');
     Route::post('/cv/formation', 'User\CurriculumVitaeController@formationStore')->name('cv.addEducation');
     Route::put('/cv/formation/{formation}', 'User\CurriculumVitaeController@formationUpdate')->name('cv.formation.update');
     Route::delete('/cv/formation/{formation}', 'User\CurriculumVitaeController@formationDestroy')->name('cv.formation.destroy');
+
+    // Rutas para la experiencia laboral
+    Route::get('/cv/workExperiences', 'User\CurriculumVitaeController@workExperiences');
+    Route::post('/cv/workExperience', 'User\CurriculumVitaeController@workExperienceStore')->name('cv.addworkExperience');
+    Route::put('/cv/workExperience/{workExperience}', 'User\CurriculumVitaeController@workExperienceUpdate')->name('cv.workExperience.update');
+    Route::delete('/cv/workExperience/{workExperience}', 'User\CurriculumVitaeController@workExperienceDestroy')->name('cv.workExperience.destroy');
 });
 
