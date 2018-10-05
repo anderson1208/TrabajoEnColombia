@@ -15,6 +15,9 @@
 				@include('user.partials.cv.formation')
 				@include('user.partials.cv.workExperiences')
 			</div>
+			<div class="col-md-4">
+				@include('user.partials.cv.avatar')
+			</div>
 		</div>
 	</div>
 @endsection
