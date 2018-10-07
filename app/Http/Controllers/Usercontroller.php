@@ -3,10 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\User;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Usercontroller extends Controller
 {
+
+    protected $user;
+
+    function __construct()
+    {
+        $this->middleware(function($request, $next){
+
+            $this->user = Auth::user();
+            return $next($request);
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +28,9 @@ class Usercontroller extends Controller
      */
     public function index()
     {
-        return view('user.partials.home.index');
+
+        return view('user.partials.home.index')
+        ->with('user', $this->user);
     }
 
     /**

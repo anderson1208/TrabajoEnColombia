@@ -28,6 +28,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function getFullNameAttribute()
+    {
+        return "{$this->name} {$this->last_name}";
+    }
+
     public function identificationType()
     {
         return $this->belongsTo(IdentificationType::class, 'identification_type_id');
