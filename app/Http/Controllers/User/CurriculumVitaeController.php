@@ -13,6 +13,7 @@ use App\WorkExperience;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CurriculumVitaeController extends Controller
 {
@@ -75,6 +76,33 @@ class CurriculumVitaeController extends Controller
             'result'    =>  true,
             'data'      =>  $cv
         ]);
+    }
+
+    public function uploadImage(Request $request)
+    {
+
+        $this->validate($request,[
+            'avatar'    =>  'required|mimes:jpeg,jpg,png'
+        ]);
+
+        if($request->file('avatar'))
+        {
+            if($this->user->avatar)
+                Storage::disk('public')->delete($this->user->avatar);
+
+            $path = Storage::disk('public')->put('image', $request->file('avatar'));
+            $this->user->avatar = $path;
+            $this->user->update();
+
+            return response()->json([
+                'avatar' => $path
+            ]);
+        }
+
+        return response()->json([
+            'error' => true,
+            'msg'   => 'Lo sentimos ha ocurrido un error'
+        ], 500);
     }
 
     public function formations(Request $request)

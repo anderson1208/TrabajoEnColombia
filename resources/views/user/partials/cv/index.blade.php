@@ -39,4 +39,5 @@
 	@yield('professionalProfile')
 	@yield('education')
 	@yield('workExperience')
+	@yield('avatar')
 @endsection
