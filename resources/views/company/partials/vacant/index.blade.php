@@ -23,7 +23,7 @@
 				<th>Tipo de contrato</th>
 				<th>Salario</th>
 				<th>Fecha limite</th>
-				<th>Fecha de creación</th>
+				<th>Area de trabajo</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -36,7 +36,7 @@
 				<td> {{ $vacant->contractType->name }} </td>
 				<td> {{ $vacant->salary }} </td>
 				<td> {{ $vacant->expired_date }} </td>
-				<td> {{ $vacant->created_at }} </td>
+				<td> {{ $vacant->areaWork->name }} </td>
 				<td>
 					<a href="{{route('vacant.edit', $vacant)}}" class="btn btn-sm btn-primary">Editar</a>
 					<a 

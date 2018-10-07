@@ -15,25 +15,37 @@
 			<form action="{{url('company/vacant')}}" method="POST" id="formCreareVacant">
 				{{ csrf_field() }}
 				<div class="form-row">
-					<div class="col-md-4">
+					<div class="col-md-12 form-group">
 						<label for="name">Nombre de la vacante</label>
 						<input type="text" name="title" placeholder="" class="form-control">
 					</div>
-					<div class="col-md-2">
+				</div>
+				<div class="form-row">
+					<div class="col-md-4 form-group">
 						<label for="contract_type_id">Tipo de contrato</label>
 						{!! Form::select('contract_type_id', $contractTypes, null, ['class'=>'form-control']) !!}
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-4 form-group">
 						<label for="working_day_id">Jornada</label>
 						{!! Form::select('working_day_id', $workingDay, null, ['class'=>'form-control']) !!}
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-4 form-group">
 						<label for="salary">Salario</label>
 						{!! Form::text('salary', null, ['class' => 'form-control']) !!}
 					</div>
-					<div class="col-md-2">
+				</div>
+				<div class="form-row">
+					<div class="col-md-3 form-group">
 						<label for="expired_date">Fecha de culminación</label>
 						<input type="text" id="datepicker" name="expired_date" class="form-control">
+					</div>
+					<div class="form-group col-md-4">
+						<label for="">Area</label>
+						{!! Form::select('area_work_id', $areaWorks, null, ['class' => 'form-control', 'placeholder' => '- Seleccione un area -']) !!}
+					</div>
+					<div class="form-group col-md-2">
+						<label for="">N° de vacantes</label>
+						{!! Form::text('amount', null, ['class' => 'form-control', 'placeholder' => 'Cantida de vacante(s)']) !!}
 					</div>
 				</div>
 				<div class="form-row">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Company;
 
 use App\Vacant;
 use App\WorkingDay;
+use App\AreaWork;
 use App\ContractType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -31,7 +32,9 @@ class VacantController extends Controller
      */
     public function index()
     {
-        $vacants = $this->company->vacants()->get();
+        $vacants = $this->company->vacants()
+        ->with('areaWork')
+        ->get();
 
         return view('company.partials.vacant.index')
         ->with('vacants', $vacants);
@@ -46,10 +49,12 @@ class VacantController extends Controller
     {
         $contractTypes = ContractType::all()->pluck('name', 'id');
         $workingDay = WorkingDay::all()->pluck('name', 'id');
+        $areaWorks = AreaWork::all()->pluck('name', 'id');
         
         return view('company.partials.vacant.create')
         ->with('contractTypes', $contractTypes)
-        ->with('workingDay', $workingDay);
+        ->with('workingDay', $workingDay)
+        ->with('areaWorks', $areaWorks);
     }
 
     /**
@@ -96,11 +101,13 @@ class VacantController extends Controller
     {
         $contractTypes = ContractType::all()->pluck('name', 'id');
         $workingDay = WorkingDay::all()->pluck('name', 'id');
+        $areaWorks = AreaWork::all()->pluck('name', 'id');
 
         return view('company.partials.vacant.edit')
         ->with('vacant', $vacant)
         ->with('contractTypes', $contractTypes)
-        ->with('workingDay', $workingDay);
+        ->with('workingDay', $workingDay)
+        ->with('areaWorks', $areaWorks);
     }
 
     /**

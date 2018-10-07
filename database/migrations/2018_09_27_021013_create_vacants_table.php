@@ -23,6 +23,7 @@ class CreateVacantsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->double('salary');
+            $table->unsignedInteger('amount')->default(1);
             $table->timestamp('expired_date');
             $table->timestamps();
 

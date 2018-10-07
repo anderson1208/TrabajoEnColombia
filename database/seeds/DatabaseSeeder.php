@@ -14,6 +14,7 @@ use App\ContractType;
 use App\EducationLevel;
 use App\EducationState;
 use App\Vacant;
+use App\CurriculumVitae;
 
 class DatabaseSeeder extends Seeder
 {
@@ -367,7 +368,14 @@ class DatabaseSeeder extends Seeder
      */
     public function users()
     {
-    	$this->users = factory(User::class, 10)->create();
+        $this->users = collect();
+
+    	factory(User::class, 10)->create()->each(function($user){
+            $this->users->push($user);
+
+            // Creamos la hoja de vida vacia
+            $user->cv()->save(new CurriculumVitae);
+        });
     }
 
     /**

@@ -18,7 +18,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 // Route::group(['middleware'=>'company_guest'], function(){
 	// Route::post('company_logout', 'AuthCompany\LoginController@logout');
