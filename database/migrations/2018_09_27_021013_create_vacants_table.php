@@ -16,6 +16,8 @@ class CreateVacantsTable extends Migration
         Schema::create('vacants', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('area_work_id');
+            $table->string('area_work_other')->nullable();
             $table->unsignedInteger('working_day_id');
             $table->unsignedInteger('contract_type_id');
             $table->string('title');
@@ -26,6 +28,10 @@ class CreateVacantsTable extends Migration
 
             // Relacion con la empresa
             $table->foreign('company_id')->references('id')->on('companies')
+            ->onDelete('cascade');
+
+            // Relacion con el area de trabajo
+            $table->foreign('area_work_id')->references('id')->on('area_works')
             ->onDelete('cascade');
 
             // Relacion con la jornada

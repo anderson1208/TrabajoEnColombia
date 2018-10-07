@@ -9,7 +9,7 @@ class Vacant extends Model
 {
 
  	protected $fillable = [
- 		'company_id', 'working_day_id', 'contract_type_id',  'title', 'description', 'salary', 'expired_date', 
+ 		'company_id', 'area_work_id', 'area_work_other', 'working_day_id', 'contract_type_id',  'title', 'description', 'salary', 'expired_date', 
  	];   
 
  	public function company()

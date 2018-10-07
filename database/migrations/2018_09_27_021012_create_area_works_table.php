@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIdentificationTypesTable extends Migration
+class CreateAreaWorksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateIdentificationTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('identification_types', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('area_works', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('name');
-            $table->string('abbreviation');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateIdentificationTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('identification_types');
+        Schema::dropIfExists('area_works');
     }
 }

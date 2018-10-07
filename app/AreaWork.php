@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class IdentificationType extends Model
+class AreaWork extends Model
 {
     protected $fillable = [
-    	'name', 'abbreviation'
+    	'name'
     ];
 }
