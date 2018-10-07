@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use App\User;
+use App\Gender;
 use App\CivilStatus;
 use App\EducationLevel;
 use App\EducationState;
+use App\WorkExperience;
 use App\IdentificationType;
 use App\EducationInformation;
-use App\WorkExperience;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -34,13 +35,15 @@ class CurriculumVitaeController extends Controller
         $educationLevels = EducationLevel::all()->pluck('name', 'id');
         $educationStates = EducationState::all()->pluck('name', 'id');
     	$civilStatuses = CivilStatus::all()->pluck('name', 'id');
+        $genders = Gender::all()->pluck('name', 'id');
 
     	return view('user.partials.cv.index')
     	->with('user',$this->user)
-    	->with('identificationTypes',$identificationTypes)
-    	->with('civilStatuses', $civilStatuses)
+        ->with('genders',$genders)
+        ->with('civilStatuses', $civilStatuses)
         ->with('educationLevels',$educationLevels)
-        ->with('educationStates',$educationStates); 
+        ->with('educationStates',$educationStates)
+    	->with('identificationTypes',$identificationTypes);
     }
 
     public function updatePersonalInfo(Request $request)

@@ -40,6 +40,12 @@
 			</div>
 		</div>
 		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="">Genero</label>
+				{!! Form::select('gender_id', $genders, $user->gender_id, ['class'=>'form-control', 'placeholder'=>'- Seleccione un genero -']) !!}
+			</div>
+		</div>
+		<div class="form-row">
 			<div class="form-group col-md-12">
 				<button type="submit" class="btn btn-primary btn-block">Actualizar información personal</button>
 			</div>
