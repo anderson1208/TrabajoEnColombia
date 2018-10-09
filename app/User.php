@@ -61,4 +61,36 @@ class User extends Authenticatable
     {
         return $this->hasOne(EmploymentPreference::class, 'user_id');
     }
+
+    public function getPercentageCompleteProfile()
+    {
+        $totalField = 0;
+        $fieldEmpty = 0;
+        $fieldDirty = 0;
+        // Get points from personal information
+        foreach($this->fillable as $field)
+        {
+            if($this->$field)
+                $fieldDirty++;
+            else
+                $fieldEmpty++;
+
+            $totalField++;
+        }
+
+        $cv = $this->cv->getPercentageCompleteProfile();
+        $ep = $this->employmentPreference->getPercentageCompleteProfile();
+        $address = $this->address->getPercentageCompleteProfile();
+
+        $totalField = ($cv['totalField'] + $ep['totalField'] + $address['totalField'] + $totalField);
+        $fieldEmpty = ($cv['fieldEmpty'] + $ep['fieldEmpty'] + $address['fieldEmpty'] + $fieldEmpty);
+        $fieldDirty = ($cv['fieldDirty'] + $ep['fieldDirty'] + $address['fieldDirty'] + $fieldDirty);
+        
+        return [
+            'totalField' => $totalField,
+            'fieldEmpty' => $fieldEmpty,
+            'fieldDirty' => $fieldDirty,
+            'percentage' => round( ($fieldDirty / $totalField) * 100)
+        ];
+    }
 }

@@ -36,7 +36,7 @@
 			</div>
 			<div class="form-group col-md-6">
 				<label for="">Estado civil</label>
-				{!! Form::select('identification_type_id', $civilStatuses, $user->civil_status_id, ['class'=>'form-control', 'placeholder'=>'- Seleccione un estado civil -']) !!}
+				{!! Form::select('civil_status_id', $civilStatuses, $user->civil_status_id, ['class'=>'form-control', 'placeholder'=>'- Seleccione un estado civil -']) !!}
 			</div>
 		</div>
 		<div class="form-row">

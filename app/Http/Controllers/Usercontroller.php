@@ -29,6 +29,8 @@ class Usercontroller extends Controller
      */
     public function index()
     {
+        // return $this->user->getPercentageCompleteProfile();
+
         return view('user.partials.home.index')
         ->with('user', $this->user);
     }

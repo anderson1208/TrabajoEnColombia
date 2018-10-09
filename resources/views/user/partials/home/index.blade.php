@@ -19,7 +19,7 @@
 						<div class="">
 							<h5>Completa tu perfil</h5>
 							<div class="progress">
-							  	<div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+							  	<div class="progress-bar" role="progressbar" style="width: {{$user->getPercentageCompleteProfile()['percentage']}}%;" aria-valuenow="{{$user->getPercentageCompleteProfile()['percentage']}}" aria-valuemin="0" aria-valuemax="100">{{$user->getPercentageCompleteProfile()['percentage']}}%</div>
 							</div>
 						</div>
 					</div>
