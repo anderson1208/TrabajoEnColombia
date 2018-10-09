@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\User;
 use App\Vacant;
-
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class Usercontroller extends Controller
+class VacantController extends Controller
 {
 
     protected $user;
@@ -29,8 +29,19 @@ class Usercontroller extends Controller
      */
     public function index()
     {
-        return view('user.partials.home.index')
-        ->with('user', $this->user);
+        //
+    }
+
+    public function related()
+    {
+        $ep = $this->user->employmentPreference->areasWork()->get()->pluck('id');
+        $vacants = Vacant::whereIn('area_work_id', $ep)->get();
+
+        return response()->json([
+            'view'  => View('user.partials.home.vacantsRelatedMyProfile')
+            ->with('vacants', $vacants)
+            ->render()
+        ]);
     }
 
     /**

@@ -46,6 +46,10 @@ Route::group(['prefix' => 'user', 'middleware'=>'auth'], function() {
 
     Route::get('/home', 'UserController@index')->name('user.home');
 
+    // Obtiene las vacantes de acuerdo a las preferencias de empleo
+    Route::get('vacantsRelated', 'User\VacantController@related');
+
+    // 
     Route::get('cv', 'User\CurriculumVitaeController@index')->name('myCV');
     Route::put('cv/updatePersonalInfo', 'User\CurriculumVitaeController@updatePersonalInfo')->name('cv.update.personalInfo');
 

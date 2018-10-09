@@ -27,8 +27,35 @@
 			</div>
 			<div class="col-md-8">
 				@include('user.partials.home.searchJob')
-				@include('user.partials.home.vacantsRelatedMyProfile')	
+
+				{{-- Vacantes relacionadas --}}
+				<div class="card mb-2">
+					<div class="card-header bg-white">
+						<h5>Vacantes relacionadas con mi perfil</h5>
+					</div>
+					<div class="card-body" id="vacantsRelated">
+						<h5>Cargando...</h5>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+@endsection
+
+@section('js')
+	<script>
+		(function(){
+
+			var getVacantsRelated = function(){
+
+				$.get('/user/vacantsRelated', function(data){
+
+					$("#vacantsRelated").empty().html(data.view);
+
+				}, 'json');
+			}
+
+			getVacantsRelated();
+		}());
+	</script>
 @endsection
