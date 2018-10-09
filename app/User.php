@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(CurriculumVitae::class, 'user_id');
     }
+
+    public function employmentPreference()
+    {
+        return $this->hasOne(EmploymentPreference::class, 'user_id');
+    }
 }

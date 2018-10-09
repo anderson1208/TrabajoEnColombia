@@ -69,5 +69,8 @@ Route::group(['prefix' => 'user', 'middleware'=>'auth'], function() {
 
     // Ruta para actualizar la imagen del avatar
     Route::post('/cv/uploadImage', 'User\CurriculumVitaeController@uploadImage');
+
+    // Ruta para las preferencias de empleo
+    Route::put('/cv/updateEmploymentPreference', 'User\CurriculumVitaeController@updateEmploymentPreference');
 });
 

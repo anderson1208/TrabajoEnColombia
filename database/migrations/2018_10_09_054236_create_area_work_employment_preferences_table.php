@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAreaWorkUsersTable extends Migration
+class CreateAreaWorkEmploymentPreferencesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateAreaWorkUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('area_work_users', function (Blueprint $table) {
+        Schema::create('area_work_employment_preferences', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('employment_preference_id');
             $table->unsignedBigInteger('area_work_id');
 
-            // Relacion con el usuario
-            $table->foreign('user_id')->references('id')->on('users')
+            // Relacion con las preferencias de empleo
+            $table->foreign('employment_preference_id', 'ep_id_foreign')->references('id')->on('employment_preferences')
             ->onDelete('cascade');
 
             // Relacion con el area de trabajo
@@ -37,6 +37,6 @@ class CreateAreaWorkUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('area_work_users');
+        Schema::dropIfExists('area_work_employment_preferences');
     }
 }

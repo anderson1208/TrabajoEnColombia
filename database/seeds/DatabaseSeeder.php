@@ -3,18 +3,19 @@
 use Illuminate\Database\Seeder;
 
 use App\User;
+use App\Vacant;
 use App\Company;
-use App\IdentificationType;
 use App\Gender;
 use App\AreaWork;
-use App\CivilStatus;
 use App\WorkingDay;
+use App\CivilStatus;
 use App\VacantState;
 use App\ContractType;
 use App\EducationLevel;
 use App\EducationState;
-use App\Vacant;
 use App\CurriculumVitae;
+use App\IdentificationType;
+use App\EmploymentPreference;
 
 class DatabaseSeeder extends Seeder
 {
@@ -375,6 +376,7 @@ class DatabaseSeeder extends Seeder
 
             // Creamos la hoja de vida vacia
             $user->cv()->save(new CurriculumVitae);
+            $user->employmentPreference()->save(new EmploymentPreference);
         });
     }
 

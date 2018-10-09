@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\User;
 use App\Gender;
+use App\AreaWork;
 use App\CivilStatus;
 use App\EducationLevel;
 use App\EducationState;
@@ -31,11 +32,14 @@ class CurriculumVitaeController extends Controller
 
     public function index()
     {
+
+        // return response()->json($this->user->employmentPreference->areasWork()->get()->pluck('id'));
     	$identificationTypes = IdentificationType::all()->pluck('name', 'id');
         $educationLevels = EducationLevel::all()->pluck('name', 'id');
         $educationStates = EducationState::all()->pluck('name', 'id');
     	$civilStatuses = CivilStatus::all()->pluck('name', 'id');
         $genders = Gender::all()->pluck('name', 'id');
+        $areasWork = AreaWork::all()->pluck('name', 'id');
 
     	return view('user.partials.cv.index')
     	->with('user',$this->user)
@@ -43,7 +47,8 @@ class CurriculumVitaeController extends Controller
         ->with('civilStatuses', $civilStatuses)
         ->with('educationLevels',$educationLevels)
         ->with('educationStates',$educationStates)
-    	->with('identificationTypes',$identificationTypes);
+    	->with('identificationTypes',$identificationTypes)
+        ->with('areasWork', $areasWork);
     }
 
     public function updatePersonalInfo(Request $request)
@@ -106,6 +111,20 @@ class CurriculumVitaeController extends Controller
             'error' => true,
             'msg'   => 'Lo sentimos ha ocurrido un error'
         ], 500);
+    }
+
+    public function updateEmploymentPreference(Request $request)
+    {
+
+        $employmentPreference = $this->user->employmentPreference;
+        $employmentPreference->fill($request->all());
+        $employmentPreference->update();
+        
+        $employmentPreference->areasWork()->sync($request->areas);
+
+        return response()->json([
+            'result' => true
+        ]);
     }
 
     public function formations(Request $request)
