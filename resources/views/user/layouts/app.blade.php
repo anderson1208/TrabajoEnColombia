@@ -67,7 +67,7 @@
 							<i class="far fa-address-book"></i>
 							<span>Hoja de vida</span>
 						</a>						
-						<a class="{{ (menuActive('myApplications')) ? 'active' : '' }}" href="#pills-password">
+						<a class="{{ (menuActive('myApplications')) ? 'active' : '' }}" href="{{route('myApplications')}}">
 							<i class="fa fa-clipboard-list"></i>
 							<span>Aplicaciones</span>
 						</a>

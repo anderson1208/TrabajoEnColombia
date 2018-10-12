@@ -85,5 +85,6 @@ Route::group(['prefix' => 'user', 'middleware'=>'auth'], function() {
     Route::get('vacants/{vacant}/process', 'User\VacantController@process');
 
     // Ruta para las aplicaciones
+    Route::get('myApplications', 'User\VacantController@myApplications')->name('myApplications');
 });
 

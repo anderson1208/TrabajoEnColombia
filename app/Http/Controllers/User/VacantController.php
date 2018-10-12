@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\User;
 use App\Vacant;
+use App\VacantState;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,19 @@ class VacantController extends Controller
     public function index()
     {
         //
+    }
+
+    public function myApplications()
+    {
+        // Obtenemos todas las aplicaciones
+        $myApplications = $this->user->vacants()->get();
+
+        // Obtenemos todos los estados que puede tener una vacante
+        $vacanStates = VacantState::all();
+
+        return view('user.partials.vacants.applications')
+        ->with('vacanStates', $vacanStates)
+        ->with('vacants', $myApplications);
     }
 
     public function related()
