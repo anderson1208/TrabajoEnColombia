@@ -82,5 +82,8 @@ Route::group(['prefix' => 'user', 'middleware'=>'auth'], function() {
     Route::post('vacants', 'User\VacantController@store');
 
     Route::get('vacants/{vacant}', 'User\VacantController@show');
+    Route::get('vacants/{vacant}/process', 'User\VacantController@process');
+
+    // Ruta para las aplicaciones
 });
 

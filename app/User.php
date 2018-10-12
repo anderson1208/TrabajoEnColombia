@@ -62,6 +62,13 @@ class User extends Authenticatable
         return $this->hasOne(EmploymentPreference::class, 'user_id');
     }
 
+    public function vacants()
+    {
+        return $this->belongsToMany(Vacant::class, 'user_vacants')
+        ->withPivot('vacant_state_id')
+        ->using(UserVacant::class);
+    }
+
     public function getPercentageCompleteProfile()
     {
         $totalField = 0;

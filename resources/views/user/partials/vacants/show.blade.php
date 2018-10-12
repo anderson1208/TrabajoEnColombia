@@ -103,7 +103,7 @@
 					},
 					success: function(data){
 						form.find('button').text('Aplicar').prop('disabled', false);
-						console.log(data);
+						window.location.reload();
 					},
 					error: function(xhr){
 						form.find('button').text('Aplicar').prop('disabled', false);

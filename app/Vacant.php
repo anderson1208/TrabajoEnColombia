@@ -41,4 +41,11 @@ class Vacant extends Model
  	{
  		return $this->belongsTo(AreaWork::class, 'area_work_id');
  	}
+
+ 	public function users()
+ 	{
+ 		return $this->belongsToMany(User::class, 'user_vacants')
+ 		->withPivot('vacant_state_id')
+ 		->using(UserVacant::class);
+ 	}
 }
