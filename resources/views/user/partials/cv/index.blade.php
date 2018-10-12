@@ -8,19 +8,17 @@
 @endsection
 
 @section('content')
-	<div class="container">
-		<div class="row">
-			<div class="col-md-8">
-				@include('user.partials.cv.personalInformation')
-				@include('user.partials.cv.address')
-				@include('user.partials.cv.professionalProfile')
-				@include('user.partials.cv.formation')
-				@include('user.partials.cv.workExperiences')
-				@include('user.partials.cv.employmentPreferences')
-			</div>
-			<div class="col-md-4">
-				@include('user.partials.cv.avatar')
-			</div>
+	<div class="row">
+		<div class="col-md-8">
+			@include('user.partials.cv.personalInformation')
+			@include('user.partials.cv.address')
+			@include('user.partials.cv.professionalProfile')
+			@include('user.partials.cv.formation')
+			@include('user.partials.cv.workExperiences')
+			@include('user.partials.cv.employmentPreferences')
+		</div>
+		<div class="col-md-4">
+			@include('user.partials.cv.avatar')
 		</div>
 	</div>
 @endsection

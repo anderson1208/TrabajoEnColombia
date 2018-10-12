@@ -46,7 +46,8 @@ class VacantController extends Controller
      */
     public function show(Vacant $vacant)
     {
-        //
+        return view('vacant.show')
+        ->with('vacant', $vacant);
     }
 
     /**

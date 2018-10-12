@@ -76,5 +76,11 @@ Route::group(['prefix' => 'user', 'middleware'=>'auth'], function() {
 
     // Ruta para las preferencias de empleo
     Route::put('/cv/updateEmploymentPreference', 'User\CurriculumVitaeController@updateEmploymentPreference');
+
+    // Ruta para las ofertas de trabajo
+    Route::get('vacants', 'User\VacantController@index');
+    Route::post('vacants', 'User\VacantController@store');
+
+    Route::get('vacants/{vacant}', 'User\VacantController@show');
 });
 

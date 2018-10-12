@@ -45,16 +45,6 @@ class VacantController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -62,7 +52,9 @@ class VacantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json([
+            'data'  =>  $request->all()
+        ]);
     }
 
     /**
@@ -71,32 +63,10 @@ class VacantController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Vacant $vacant)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $user)
-    {
-        //
+        return view('user.partials.vacants.show')
+        ->with('vacant', $vacant);
     }
 
     /**
@@ -105,7 +75,7 @@ class VacantController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Vacant $vacant)
     {
         //
     }
