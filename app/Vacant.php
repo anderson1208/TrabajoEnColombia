@@ -11,7 +11,7 @@ class Vacant extends Model
 {
 
  	protected $fillable = [
- 		'company_id', 'area_work_id', 'area_work_other', 'working_day_id', 'contract_type_id',  'title', 'description', 'salary', 'amount', 'expired_date', 
+ 		'company_id', 'area_work_id', 'area_work_other', 'working_day_id', 'contract_type_id',  'title', 'description', 'salary', 'amount', 'expired_date', 'year_experiences', 'education_level_id', 'payment_interval_id'
  	];   
 
  	public function getExpiredDate()
@@ -42,6 +42,16 @@ class Vacant extends Model
  	public function areaWork()
  	{
  		return $this->belongsTo(AreaWork::class, 'area_work_id');
+ 	}
+
+ 	public function educationLevel()
+ 	{
+ 		return $this->belongsTo(EducationLevel::class, 'education_level_id'); 
+ 	}
+
+ 	public function paymentInterval()
+ 	{
+ 		return $this->belongsTo(PaymentInterval::class, 'payment_interval_id');
  	}
 
  	public function users()

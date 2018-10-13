@@ -40,11 +40,14 @@
 				<div class="vacant_conditions">
 					<h6><b>Condiciones</b></h6>
 					<ul class="nav flex-column">
-						<li class="ml-3">Condition 1</li>
-						<li class="ml-3">Condition 2</li>
-						<li class="ml-3">Condition 3</li>
-						<li class="ml-3">Condition 4</li>
-						<li class="ml-3">Condition 5</li>
+						<li class="ml-3">
+							<span><b>Años de experiencia: </b></span>
+							{{ $vacant->year_experiences }}
+						</li>
+						<li class="ml-3">
+							<span><b>Educación minima: </b></span>
+							{{ $vacant->educationLevel->name }}
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -72,7 +75,7 @@
 				</div>
 				<div class="d-flex flex-column">
 					<span class=""><b>Salario</b></span>
-					<span>$ {{ number_format($vacant->salary, 2, ',', '.') }}</span>
+					<span>$ {{ number_format($vacant->salary, 2, ',', '.') }} ({{ ucfirst($vacant->paymentInterval->name)}}) </span>
 				</div>
 			</div>
 			{!! Form::open(['url' => '/user/vacants', 'method', 'POST', 'id' => 'formApplyOffer']) !!}

@@ -14,6 +14,7 @@ use App\ContractType;
 use App\EducationLevel;
 use App\EducationState;
 use App\CurriculumVitae;
+use App\PaymentInterval;
 use App\IdentificationType;
 use App\EmploymentPreference;
 
@@ -128,6 +129,15 @@ class DatabaseSeeder extends Seeder
     protected $users;
 
     /**
+     * Seeded paymentIntervals.
+     *
+     * @var \Illuminate\Support\Collection
+     */
+    protected $paymentIntervals = [
+        'diario', 'semanal', 'quincenal', 'mensual'
+    ];
+
+    /**
      * Seeded vacants.
      *
      * @var \Illuminate\Support\Collection
@@ -150,6 +160,7 @@ class DatabaseSeeder extends Seeder
         'contractTypes',
         'educationLevels',
         'educationStates',
+        'paymentIntervals',
         'identificationTypes',
         'companies',
         'users',
@@ -277,6 +288,25 @@ class DatabaseSeeder extends Seeder
     }
 
     /**
+     * Seed paymentIntervals.
+     *
+     * @return void
+     */
+    public function paymentIntervals()
+    {
+        $paymentIntervalsTemp = collect();
+
+        foreach($this->paymentIntervals as $paymentInterval)
+        {   
+            $paymentIntervalsTemp->push(
+                factory(PaymentInterval::class)->create(['name' =>  $paymentInterval])
+            );
+        }
+
+        $this->paymentIntervals = $paymentIntervalsTemp;
+    }
+
+    /**
      * Seed contractTypes.
      *
      * @return void
@@ -393,7 +423,9 @@ class DatabaseSeeder extends Seeder
 
     		$company->vacants()->saveMany(
     			factory(Vacant::class, 5)->make([
-	    			'company_id'		=>	$company->id,
+	    			'company_id'            =>	$company->id,
+                    'payment_interval_id'   =>  $this->paymentIntervals->pluck('id')->random(1)->first(),
+                    'education_level_id'    =>  $this->educationLevels->pluck('id')->random(1)->first()
     			])->each(function($vacant){
     				$this->vacants->push($vacant);
     			})

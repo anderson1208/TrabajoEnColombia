@@ -6,6 +6,8 @@ use App\Vacant;
 use App\WorkingDay;
 use App\AreaWork;
 use App\ContractType;
+use App\EducationLevel;
+use App\PaymentInterval;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -50,10 +52,14 @@ class VacantController extends Controller
         $contractTypes = ContractType::all()->pluck('name', 'id');
         $workingDay = WorkingDay::all()->pluck('name', 'id');
         $areaWorks = AreaWork::all()->pluck('name', 'id');
+        $educationLevels = EducationLevel::all()->pluck('name', 'id');
+        $paymentIntervals = PaymentInterval::all()->pluck('name', 'id');
         
         return view('company.partials.vacant.create')
         ->with('contractTypes', $contractTypes)
         ->with('workingDay', $workingDay)
+        ->with('educationLevels', $educationLevels)
+        ->with('paymentIntervals', $paymentIntervals)
         ->with('areaWorks', $areaWorks);
     }
 
@@ -102,11 +108,15 @@ class VacantController extends Controller
         $contractTypes = ContractType::all()->pluck('name', 'id');
         $workingDay = WorkingDay::all()->pluck('name', 'id');
         $areaWorks = AreaWork::all()->pluck('name', 'id');
+        $educationLevels = EducationLevel::all()->pluck('name', 'id');
+        $paymentIntervals = PaymentInterval::all()->pluck('name', 'id');
 
         return view('company.partials.vacant.edit')
         ->with('vacant', $vacant)
         ->with('contractTypes', $contractTypes)
         ->with('workingDay', $workingDay)
+        ->with('educationLevels', $educationLevels)
+        ->with('paymentIntervals', $paymentIntervals)
         ->with('areaWorks', $areaWorks);
     }
 

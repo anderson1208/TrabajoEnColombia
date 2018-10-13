@@ -25,6 +25,9 @@ class CreateVacantsTable extends Migration
             $table->double('salary');
             $table->unsignedInteger('amount')->default(1);
             $table->timestamp('expired_date');
+            $table->unsignedInteger('year_experiences')->default(0);
+            $table->unsignedInteger('education_level_id')->nullable();
+            $table->unsignedInteger('payment_interval_id')->nullable();
             $table->timestamps();
 
             // Relacion con la empresa
@@ -41,6 +44,14 @@ class CreateVacantsTable extends Migration
 
             // Relacion con la tipo de contrato
             $table->foreign('contract_type_id')->references('id')->on('contract_types')
+            ->onDelete('cascade');
+
+            // Relacion con el nivel de educación
+            $table->foreign('education_level_id')->references('id')->on('education_levels')
+            ->onDelete('cascade');
+
+            // Relacion con el nivel de educación
+            $table->foreign('payment_interval_id')->references('id')->on('payment_intervals')
             ->onDelete('cascade');
         });
     }

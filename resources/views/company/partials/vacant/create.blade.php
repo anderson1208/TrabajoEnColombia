@@ -47,6 +47,20 @@
 						<label for="">N° de vacantes</label>
 						{!! Form::text('amount', null, ['class' => 'form-control', 'placeholder' => 'Cantida de vacante(s)']) !!}
 					</div>
+					<div class="form-group col-md-2">
+						<label for="">Años de experiencia</label>
+						{!! Form::text('year_experiences', null, ['class' => 'form-control', 'placeholder' => 'Años de experiencia']) !!}
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="">Educación minima</label>
+						{!! Form::select('education_level_id', $educationLevels, null, ['class' => 'form-control', 'placeholder' => '- Seleccione un nivel educativo -']) !!}
+					</div>
+					<div class="form-group col-md-4">
+						<label for="">Intervalo de pago</label>
+						{!! Form::select('payment_interval_id', $paymentIntervals, null, ['class' => 'form-control', 'placeholder' => '- Seleccione un tipo -']) !!}
+					</div>
 				</div>
 				<div class="form-row">
 					<div class="col">

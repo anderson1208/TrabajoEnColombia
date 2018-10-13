@@ -16,5 +16,6 @@ $factory->define(App\Vacant::class, function (Faker $faker) {
 		'area_work_id'		=>	$faker->randomElement($areaWorks),
 		'working_day_id'	=>	$faker->randomElement($workingDays),
 		'contract_type_id'	=>	$faker->randomElement($contractTypes),
+        'year_experiences'  =>  $faker->numberBetween(0, 3),
     ];
 });
