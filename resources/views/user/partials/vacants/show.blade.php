@@ -37,6 +37,12 @@
 					<h6><b>Descripción</b></h6>
 					{!! $vacant->description !!}
 				</div>
+				<div class="mb-3">
+					<div class="">
+						<span><b>Cantidad de vacantes: </b></span>
+						{{ $vacant->amount }}
+					</div>
+				</div>
 				<div class="vacant_conditions">
 					<h6><b>Condiciones</b></h6>
 					<ul class="nav flex-column">
@@ -78,10 +84,13 @@
 					<span>$ {{ number_format($vacant->salary, 2, ',', '.') }} ({{ ucfirst($vacant->paymentInterval->name)}}) </span>
 				</div>
 			</div>
+
+			@if(!Auth::user()->iAmApplying($vacant))
 			{!! Form::open(['url' => '/user/vacants', 'method', 'POST', 'id' => 'formApplyOffer']) !!}
 				{!! Form::hidden('vacant_id', $vacant->id, []) !!}
 				<button class="btn btn-primary btn-block" type="submit">Aplicar</button>
 			{!! Form::close() !!}
+			@endif
 		</div>
 	</div>
 @endsection

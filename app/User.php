@@ -6,6 +6,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Vacant;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -67,6 +69,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Vacant::class, 'user_vacants')
         ->withPivot('vacant_state_id')
         ->using(UserVacant::class);
+    }
+
+    public function iAmApplying(Vacant $vacant)
+    {
+        $has = $this->vacants()->get()->pluck('pivot')->whereIn('vacant_id', $vacant->id);
+
+        return count($has) > 0;
     }
 
     public function getPercentageCompleteProfile()

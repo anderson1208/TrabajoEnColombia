@@ -91,6 +91,7 @@ class VacantController extends Controller
      */
     public function show(Vacant $vacant)
     {
+
         // buscamos si el usuario ya aplico a la vacante
         $myApplications = $this->user->vacants()
         ->where('vacant_id', $vacant->id)
@@ -104,12 +105,22 @@ class VacantController extends Controller
             return redirect("/user/vacants/{$vacant->id}/process");
 
         return view('user.partials.vacants.show')
-        ->with('vacant', $vacant);
+        ->with('vacant', $vacant);   
     }
 
     public function process(Vacant $vacant)
     {
-        dd("ha sido redireccionado :P");
+        // Obtenemos todos los estados que puede tener una vacante
+        $vacantStates = VacantState::all();
+        $vacant = $this->user->vacants()
+        ->where('vacant_id', $vacant->id)
+        ->get()
+        ->pluck('pivot')
+        ->first();
+
+        return view('user.partials.vacants.showProcess')
+        ->with('vacantStates', $vacantStates)
+        ->with('vacant', $vacant);  
     }
 
     /**

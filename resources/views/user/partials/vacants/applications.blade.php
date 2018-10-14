@@ -29,8 +29,8 @@
 								@endforeach
 							</div>
 							<div class="">
-								<a href="{{url("/user/vacants/{$vacant->id}")}}" class="btn btn-primary">
-									<span class="d-block" style="font-size: 0.6rem;">129 aplicados</span>
+								<a href="{{url("/user/vacants/{$vacant->id}")}}" class="btn btn-primary ml-2">
+									<span class="d-block" style="font-size: 0.6rem;"> {{ $vacant->totaUsersText() }} </span>
 									<span>Ver comparación</span>
 								</a>
 							</div>

@@ -5,11 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
+use App\Traits\VacantTrait;
+
 use App\VacantState;
 
 class Vacant extends Model
 {
-
+	use VacantTrait;
+	
  	protected $fillable = [
  		'company_id', 'area_work_id', 'area_work_other', 'working_day_id', 'contract_type_id',  'title', 'description', 'salary', 'amount', 'expired_date', 'year_experiences', 'education_level_id', 'payment_interval_id'
  	];   
@@ -59,5 +62,20 @@ class Vacant extends Model
  		return $this->belongsToMany(User::class, 'user_vacants')
  		->withPivot('vacant_state_id')
  		->using(UserVacant::class);
+ 	}
+
+ 	public function getTotalUsers()
+ 	{
+ 		return count($this->users);
+ 	}
+
+ 	public function totaUsersText()
+ 	{
+ 		$users = $this->getTotalUsers();
+
+ 		if($users > 1)
+ 			return "{$users} aplicados";
+ 		else
+ 			return "{$users} aplicado";
  	}
 }

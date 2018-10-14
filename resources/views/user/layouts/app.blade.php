@@ -73,13 +73,12 @@
 						</a>
 						<a class="{{ (menuActive('vacants')) ? 'active' : '' }}" href="#">
 							<i class="fa fa-search"></i>
-							<span>Buscar ofertas</span>
+							<span>Buscar vacantes</span>
 						</a>
 					</div>
 		    	</div>
 		    </div>
         </div>
-
         <main class="container">
         	@yield('breadcumb')
             @yield('content')
