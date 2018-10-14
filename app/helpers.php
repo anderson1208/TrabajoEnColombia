@@ -24,3 +24,18 @@ if(!function_exists('activeTab'))
 		return false;
 	}
 }
+
+if(!function_exists('has_in_array'))
+{
+	function has_in_array(array $array, $search)
+	{
+		$filtered = array_where($array, function($value, $key) use ($search){
+            return $value['key'] == $search;
+        });
+
+        if(count($filtered) > 0)
+        	return true;
+
+        return false;
+	}
+}

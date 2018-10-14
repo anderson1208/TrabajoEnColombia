@@ -5,12 +5,20 @@ namespace App\Http\Controllers\User;
 use App\User;
 use App\Vacant;
 use App\VacantState;
+use App\ContractType;
+use App\WorkingDay;
+use App\AreaWork;
+
+use App\Traits\VacantTrait;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class VacantController extends Controller
 {
+
+    use VacantTrait;
 
     protected $user;
 
@@ -28,9 +36,29 @@ class VacantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+        if($request->has('delete'))
+        {
+            $newUrl = $this->deleteFilter($request->all());
+
+            return redirect("/user/vacants/{$newUrl}");
+        }
+
+        $filters = $this->resolveFilter($request->all());
+
+        // dd($filters);
+        
+        $contractTypes = ContractType::all();
+        $workingDays = WorkingDay::all();
+        $areasWorks = AreaWork::all();
+
+        return view('user.partials.vacants.index')
+        ->with('contractTypes', $contractTypes)
+        ->with('areasWorks', $areasWorks)
+        ->with('workingDays', $workingDays)
+        ->with('filters', $filters);
     }
 
     public function myApplications()
@@ -106,6 +134,15 @@ class VacantController extends Controller
 
         return view('user.partials.vacants.show')
         ->with('vacant', $vacant);   
+    }
+
+    public function search(Request $request)
+    {
+        $url = $request->path();
+
+        return response()->json([
+            'data' => $request->fullUrl()
+        ]);
     }
 
     public function process(Vacant $vacant)

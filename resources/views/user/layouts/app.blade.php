@@ -71,7 +71,7 @@
 							<i class="fa fa-clipboard-list"></i>
 							<span>Aplicaciones</span>
 						</a>
-						<a class="{{ (menuActive('vacants')) ? 'active' : '' }}" href="#">
+						<a class="{{ (menuActive('vacants')) ? 'active' : '' }}" href="{{url('/user/vacants')}}">
 							<i class="fa fa-search"></i>
 							<span>Buscar vacantes</span>
 						</a>

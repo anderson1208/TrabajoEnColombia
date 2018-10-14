@@ -79,6 +79,8 @@ Route::group(['prefix' => 'user', 'middleware'=>'auth'], function() {
 
     // Ruta para las ofertas de trabajo
     Route::get('vacants', 'User\VacantController@index');
+    Route::post('/vacants/{filter}/filterDestroy', 'User\VacantController@destroyFilter')->name('destroy.filter.vacant');
+
     Route::post('vacants', 'User\VacantController@store');
 
     Route::get('vacants/{vacant}', 'User\VacantController@show');
@@ -88,3 +90,5 @@ Route::group(['prefix' => 'user', 'middleware'=>'auth'], function() {
     Route::get('myApplications', 'User\VacantController@myApplications')->name('myApplications');
 });
 
+// Ruta para buscar las vacantes por los filtros
+// Route::get('/vacants/search', 'User\VacantController@search');

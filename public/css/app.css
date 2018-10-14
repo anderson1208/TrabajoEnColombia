@@ -10513,5 +10513,14 @@ a.text-dark:focus {
   border-bottom: 2px solid #a2a2a2;
 }
 
-/* Nav Wizard */
+.boxFilter {
+  height: 150px;
+  overflow-y: scroll;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.boxFilter a {
+  margin-bottom: 0.5rem;
+}
 
