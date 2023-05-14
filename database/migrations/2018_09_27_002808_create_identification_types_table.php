@@ -16,6 +16,7 @@ class CreateIdentificationTypesTable extends Migration
         Schema::create('identification_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('abbreviation');
             $table->timestamps();
         });
     }

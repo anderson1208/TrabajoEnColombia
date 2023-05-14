@@ -17,6 +17,7 @@ class CreateUserVacantsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('vacant_id');
+            // $table->unsignedBigInteger('profession_id');
             $table->unsignedInteger('vacant_state_id');
             $table->timestamps();
 
@@ -27,6 +28,10 @@ class CreateUserVacantsTable extends Migration
             // relacion con la tabla de usuarios
             $table->foreign('vacant_id')->references('id')->on('vacants')
             ->onDelete('cascade');
+
+            // relacion con la tabla de profesiones
+            // $table->foreign('profession_id')->references('id')->on('professions')
+            // ->onDelete('cascade');
 
             // relacion con la tabla de usuarios
             $table->foreign('vacant_state_id')->references('id')->on('vacant_states')

@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('identification_type_id')->nullable();
             $table->string('identification_number')->nullable();
             $table->unsignedBigInteger('address_id')->nullable();
+            $table->unsignedInteger('gender_id')->nullable();
+            $table->unsignedInteger('civil_status_id')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -35,6 +37,16 @@ class CreateUsersTable extends Migration
             // Relacion con la tabla address
             $table->foreign('address_id')->references('id')
             ->on('addresses')
+            ->onDelete('cascade');
+
+            // Relacion con la tabla genero
+            $table->foreign('gender_id')->references('id')
+            ->on('genders')
+            ->onDelete('cascade');
+
+            // Relacion con la tabla estado civil
+            $table->foreign('civil_status_id')->references('id')
+            ->on('civil_statuses')
             ->onDelete('cascade');
             
         });

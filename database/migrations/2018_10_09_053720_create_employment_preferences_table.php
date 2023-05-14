@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVacantsTable extends Migration
+class CreateEmploymentPreferencesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateVacantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('vacants', function (Blueprint $table) {
+        Schema::create('employment_preferences', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('company_id');
-            $table->string('title');
-            $table->text('description');
-            $table->timestamp('expired_date');
+            $table->unsignedBigInteger('user_id');
+            $table->float('miniun_salary')->nullable();
             $table->timestamps();
 
-            // Relacion con la empresa
-            $table->foreign('company_id')->references('id')->on('companies')
+            // Relacion con el usuario
+            $table->foreign('user_id')->references('id')->on('users')
             ->onDelete('cascade');
         });
     }
@@ -34,6 +32,6 @@ class CreateVacantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vacants');
+        Schema::dropIfExists('employment_preferences');
     }
 }

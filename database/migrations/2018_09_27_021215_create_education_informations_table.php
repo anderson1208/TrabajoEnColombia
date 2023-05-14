@@ -19,7 +19,6 @@ class CreateEducationInformationsTable extends Migration
             $table->string('school_name');
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
-            $table->string('certification');
             $table->string('file')->nullable();
             $table->unsignedInteger('education_state_id');
             $table->unsignedInteger('education_level_id');

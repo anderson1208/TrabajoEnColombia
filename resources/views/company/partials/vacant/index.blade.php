@@ -19,8 +19,11 @@
 			<tr>
 				<th>Id</th>
 				<th>Titulo</th>
+				<th>Jornada</th>
+				<th>Tipo de contrato</th>
+				<th>Salario</th>
 				<th>Fecha limite</th>
-				<th>Fecha de creación</th>
+				<th>Area de trabajo</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -29,16 +32,19 @@
 			<tr>
 				<td> {{ $vacant->id }} </td>
 				<td> {{ $vacant->title }} </td>
+				<td> {{ $vacant->workingDay->name }} </td>
+				<td> {{ $vacant->contractType->name }} </td>
+				<td> {{ $vacant->salary }} </td>
 				<td> {{ $vacant->expired_date }} </td>
-				<td> {{ $vacant->created_at }} </td>
+				<td> {{ $vacant->areaWork->name }} </td>
 				<td>
 					<a href="{{route('vacant.edit', $vacant)}}" class="btn btn-sm btn-primary">Editar</a>
 					<a 
 						href="" 
 						class="btn btn-sm btn-danger"
 						onclick="event.preventDefault();
-                                document.getElementById('vacantDel{{$company->id}}').submit();">Eliminar</a>
-					{!! Form::open(['route' => ['vacant.destroy', $company], 'method'=>'DELETE', 'id'=>"vacantDel{$company->id}"]) !!}
+                                document.getElementById('vacantDel{{$vacant->id}}').submit();">Eliminar</a>
+					{!! Form::open(['route' => ['vacant.destroy', $vacant], 'method'=>'DELETE', 'id'=>"vacantDel{$vacant->id}"]) !!}
 					{!! Form::close() !!}
 				</td>
 			</tr>
